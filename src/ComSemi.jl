@@ -85,7 +85,7 @@ module ComSemi
 
         hp = [[origin[:,i],target[:,i]] for i in 1:b]
 
-        used::Vector{Vector{Vector{Int64}}} = []
+        used::Set{Vector{Vector{Int64}}} = ()
         flag = true
 
         while flag 
@@ -108,14 +108,14 @@ module ComSemi
                 new_word_from = reduce_word(word_from,temp_thue)
                 new_word_to = reduce_word(word_to,temp_thue)
 
-                if word_from == new_word_from 
+                if word_from == new_word_from && word_to == new_word_to
                     push!(used, word)
                     continue
                 elseif new_word_from != new_word_to
                     new_replace = [new_word_from, new_word_to]
                     new_replace = sort(new_replace,rev=true)
                     push!(hp,new_replace)
-                    append!(hp, used)
+                    append!(hp, collect(used))
                     empty!(used)
                     flag = true
                     break
