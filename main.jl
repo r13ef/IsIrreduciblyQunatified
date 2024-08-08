@@ -11,18 +11,15 @@ for inter in inter_list
         csemi = ComSemi.new(n,edges)
         if ComSemi.is_cancellative(csemi) && ComSemi.is_power_cancellative(csemi) 
             inter["is_irrq"] = true
-            println("yes")
         else 
             inter["is_irrq"] = false
-            println("no")
         end
     else 
         inter["is_irrq"] = true
-        println("yes")
     end
 end
 
 output_data = JSON.json(inter_list)
-open("output/output_size_5.json","w") do f    
+open("output/output_size5.json","w") do f    
     println(f,output_data)
 end

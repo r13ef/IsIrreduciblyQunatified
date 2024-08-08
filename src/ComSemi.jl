@@ -245,10 +245,7 @@ module ComSemi
             push!(iteration_list,index_list)
         end
 
-        println(iteration_list)
-        println(length(iteration_list))
-
-        for bits_plus in Iterators.product(iteration_list...)
+        @showprogress for bits_plus in Iterators.product(iteration_list...)
 
             for bits_minus in Iterators.product(iteration_list...)
                 for index_not_equal in (1, self.n)
