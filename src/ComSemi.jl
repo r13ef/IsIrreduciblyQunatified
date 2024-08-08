@@ -5,6 +5,7 @@ module ComSemi
     using Nemo
     using DataStructures
     using Combinatorics
+    using ProgressMeter
 
     struct CSemi 
         # size of generator of this commutative semigroup (c.s.)
@@ -223,9 +224,23 @@ module ComSemi
         (_,length_of_thue::Int64) = size(origin)
         (_,length_of_ag::Int64) = size(self.ag)
 
-        for bits_plus in Iterators.product(Iterators.repeated((1:self.n), length_of_thue)...)
+        iteration_list::Vector{Vector{Int64}} = []
+        println(origin)
+        for i in 1:length_of_thue 
+            index_list::Vector{Int64} = []
+            for (j,x) in enumerate(origin[:,i])
+                if x > 0 
+                    push!(index_list,j)
+                end
+            end
+            push!(iteration_list,index_list)
+        end
 
-            for bits_minus in Iterators.product(Iterators.repeated((1:self.n), length_of_thue)...)
+        println(length(Iterators.product(iteration_list...)))
+
+        for bits_plus in Iterators.product(iteration_list...)
+
+            for bits_minus in Iterators.product(iteration_list...)
                 for index_not_equal in (1, self.n)
                     for flag in (true,false) 
                         model = Model(HiGHS.Optimizer)
@@ -233,7 +248,7 @@ module ComSemi
                         @variable(model, x[1:length_of_ag], Int)
                         @variable(model, y[1:self.n] >= 0, Int)
                         @variable(model, z[1:self.n] >= 0, Int)
-                        @constraint(model, c1[j = 1:self.n], sum(self.ag[j,k] * x[k] for k in 1:length_of_ag) + y[j] - z[j] == 0)
+                        @constraint(model, c1[j in 1:self.n], sum(self.ag[j,k] * x[k] for k in 1:length_of_ag) + y[j] - z[j] == 0)
                         @constraint(model, c2[j in 1:length_of_thue], y[bits_plus[j]] <= origin[bits_plus[j], j] - 1)
                         @constraint(model, c3[j in 1:length_of_thue], z[bits_minus[j]] <= origin[bits_minus[j], j] - 1)
                         if flag 
