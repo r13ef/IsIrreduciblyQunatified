@@ -105,13 +105,14 @@ module ComSemi
                 temp_target = reduce(hcat,[vcat(hp[i][2]) for i in 1:len])
                 temp_thue = [temp_origin,temp_target]
 
-                new_word = reduce_word(word_from,temp_thue)
+                new_word_from = reduce_word(word_from,temp_thue)
+                new_word_to = reduce_word(word_to,temp_thue)
 
-                if word_from == new_word
+                if word_from == new_word_from 
                     push!(used, word)
                     continue
-                elseif new_word != word_to
-                    new_replace = [new_word, word_to]
+                elseif new_word_from != new_word_to
+                    new_replace = [new_word_from, new_word_to]
                     new_replace = sort(new_replace,rev=true)
                     push!(hp,new_replace)
                     append!(hp, used)
@@ -127,7 +128,6 @@ module ComSemi
 
         used = sort(used, rev=true)
         len = length(used)
-        # println(used)
         reduced_origin = reduce(hcat,[vcat(used[i][1]) for i in 1:len])
         reduced_target = reduce(hcat,[vcat(used[i][2]) for i in 1:len])
         return [reduced_origin,reduced_target]
@@ -225,7 +225,6 @@ module ComSemi
         (_,length_of_ag::Int64) = size(self.ag)
 
         iteration_list::Vector{Vector{Int64}} = []
-        println(origin)
         for i in 1:length_of_thue 
             index_list::Vector{Int64} = []
             for (j,x) in enumerate(origin[:,i])
@@ -235,8 +234,6 @@ module ComSemi
             end
             push!(iteration_list,index_list)
         end
-
-        println(length(Iterators.product(iteration_list...)))
 
         for bits_plus in Iterators.product(iteration_list...)
 
