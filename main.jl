@@ -21,6 +21,6 @@ for inter in inter_list
 end
 
 # output_data = JSON.json(inter_list)
-# open("output.json","w") do f  
+# open("output_size_4.json","w") do f  
     # println(f,output_data)
 # end
