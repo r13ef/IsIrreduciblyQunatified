@@ -100,7 +100,6 @@ module ComSemi
                 word_to = word[2]
                 len = length(hp)
 
-
                 temp_origin = reduce(hcat,[vcat(hp[i][1]) for i in 1:len])
                 temp_target = reduce(hcat,[vcat(hp[i][2]) for i in 1:len])
                 temp_thue = [temp_origin,temp_target]
@@ -126,10 +125,11 @@ module ComSemi
 
         end
 
-        used = sort(used, rev=true)
-        len = length(used)
-        reduced_origin = reduce(hcat,[vcat(used[i][1]) for i in 1:len])
-        reduced_target = reduce(hcat,[vcat(used[i][2]) for i in 1:len])
+        reduced_thue::Vector{Vector{Vector{Int64}}} = collect(used)
+        reduced_thue = sort(reduced_thue, rev=true)
+        len = length(reduced_thue)
+        reduced_origin = reduce(hcat,[vcat(reduced_thue[i][1]) for i in 1:len])
+        reduced_target = reduce(hcat,[vcat(reduced_thue[i][2]) for i in 1:len])
         return [reduced_origin,reduced_target]
 
     end
