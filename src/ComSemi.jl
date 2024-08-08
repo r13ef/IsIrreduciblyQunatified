@@ -85,7 +85,8 @@ module ComSemi
 
         hp = [[origin[:,i],target[:,i]] for i in 1:b]
 
-        used::Set{Vector{Vector{Int64}}} = ()
+        used::Set{Vector{Vector{Int64}}} = Set()
+
         flag = true
 
         while flag 
@@ -121,15 +122,13 @@ module ComSemi
                 end
             end
 
-            append!(used,hp)
-
         end
 
-        reduced_thue::Vector{Vector{Vector{Int64}}} = collect(used)
-        reduced_thue = sort(reduced_thue, rev=true)
-        len = length(reduced_thue)
-        reduced_origin = reduce(hcat,[vcat(reduced_thue[i][1]) for i in 1:len])
-        reduced_target = reduce(hcat,[vcat(reduced_thue[i][2]) for i in 1:len])
+        
+        append!(hp,collect(used))
+        len = length(hp)
+        reduced_origin = reduce(hcat,[vcat(hp[i][1]) for i in 1:len])
+        reduced_target = reduce(hcat,[vcat(hp[i][2]) for i in 1:len])
         return [reduced_origin,reduced_target]
 
     end
@@ -235,6 +234,7 @@ module ComSemi
             push!(iteration_list,index_list)
         end
 
+        println(length(iteration_list))
         for bits_plus in Iterators.product(iteration_list...)
 
             for bits_minus in Iterators.product(iteration_list...)
