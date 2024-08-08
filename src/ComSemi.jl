@@ -45,7 +45,6 @@ module ComSemi
         
         thue = [origin,target]
         thue = completion(thue)
-        println(thue)
         ag = construct_ag(thue)
         csemi = CSemi(n,thue,ag)
         return csemi
@@ -111,13 +110,8 @@ module ComSemi
 
                 if word_from == new_word_from && word_to == new_word_to
                     push!(used, word)
-                    println(new_word_from,new_word_to)
-                    println(length(hp))
-                    sleep(0.5)
                     continue
                 elseif new_word_from != new_word_to
-                    println("[!]",new_word_from,new_word_to)
-                    sleep(1)
                     new_replace = [new_word_from, new_word_to]
                     sort!(new_replace,rev=true)
                     push!(used,new_replace)
@@ -137,7 +131,6 @@ module ComSemi
         len = length(hp)
         reduced_origin = reduce(hcat,[vcat(hp[i][1]) for i in 1:len])
         reduced_target = reduce(hcat,[vcat(hp[i][2]) for i in 1:len])
-        println("-------------")
         return [reduced_origin,reduced_target]
 
     end
@@ -174,7 +167,7 @@ module ComSemi
         len = length(to_sort)
         sorted_origin = reduce(hcat,[vcat(to_sort[i][1]) for i in 1:len])
         sorted_target = reduce(hcat,[vcat(to_sort[i][2]) for i in 1:len])
-        
+
         return [sorted_origin,sorted_target]
 
     end

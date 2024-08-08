@@ -2,12 +2,7 @@ using JSON
 
 include("./src/ComSemi.jl")
 inter_list = JSON.parsefile("data_sets/size_5.json")
-inter = inter_list[8]
-n::Int64 = inter["n"]
-edges::Vector{Vector{Vector{Int64}}} = inter["edges"] 
-csemi = ComSemi.new(n,edges)
 
-#=
 for inter in inter_list
     n::Int64 = inter["n"]
     edges::Vector{Vector{Vector{Int64}}} = inter["edges"]
@@ -31,4 +26,3 @@ output_data = JSON.json(inter_list)
 open("output/output_size_5.json","w") do f    
     println(f,output_data)
 end
-=# 
