@@ -45,6 +45,7 @@ module ComSemi
         
         thue = [origin,target]
         thue = completion(thue)
+        println(thue)
         ag = construct_ag(thue)
         csemi = CSemi(n,thue,ag)
         return csemi
@@ -91,7 +92,7 @@ module ComSemi
 
         while flag 
 
-            hp = sort(hp, rev=true)
+            sort!(hp, rev=true)
             flag = false
             
             while length(hp) > 1
@@ -110,25 +111,33 @@ module ComSemi
 
                 if word_from == new_word_from && word_to == new_word_to
                     push!(used, word)
+                    println(new_word_from,new_word_to)
+                    println(length(hp))
+                    sleep(0.5)
                     continue
                 elseif new_word_from != new_word_to
+                    println("[!]",new_word_from,new_word_to)
+                    sleep(1)
                     new_replace = [new_word_from, new_word_to]
-                    new_replace = sort(new_replace,rev=true)
-                    push!(hp,new_replace)
+                    sort!(new_replace,rev=true)
+                    push!(used,new_replace)
                     append!(hp, collect(used))
                     empty!(used)
                     flag = true
                     break
                 end
+
             end
 
         end
 
         
         append!(hp,collect(used))
+        sort!(hp,rev=true)
         len = length(hp)
         reduced_origin = reduce(hcat,[vcat(hp[i][1]) for i in 1:len])
         reduced_target = reduce(hcat,[vcat(hp[i][2]) for i in 1:len])
+        println("-------------")
         return [reduced_origin,reduced_target]
 
     end
@@ -157,7 +166,16 @@ module ComSemi
             origin = hcat(origin,second_word)
             target = hcat(target,first_word)
         end
-        return [origin,target]
+
+                
+        (_,b) = size(origin)
+        to_sort = [[origin[:,i],target[:,i]] for i in 1:b]
+        sort!(to_sort,rev=true)
+        len = length(to_sort)
+        sorted_origin = reduce(hcat,[vcat(to_sort[i][1]) for i in 1:len])
+        sorted_target = reduce(hcat,[vcat(to_sort[i][2]) for i in 1:len])
+        
+        return [sorted_origin,sorted_target]
 
     end
 
@@ -177,10 +195,10 @@ module ComSemi
                 first_replace_system = [origin[:,index_list[1]],target[:,index_list[1]]]
                 second_replace_system = [origin[:,index_list[2]],target[:,index_list[2]]]
                 cvector = critical_pair(first_replace_system,second_replace_system)
-                first_cvector = cvector[1]
-                second_cvector = cvector[2]
+                first_cvector = reduce_word(cvector[1],thue)
+                second_cvector = reduce_word(cvector[2],thue)
 
-                if reduce_word(first_cvector,thue) == reduce_word(second_cvector,thue)
+                if first_cvector == second_cvector
                     continue
                 else 
                     flag = true
@@ -234,7 +252,9 @@ module ComSemi
             push!(iteration_list,index_list)
         end
 
+        println(iteration_list)
         println(length(iteration_list))
+
         for bits_plus in Iterators.product(iteration_list...)
 
             for bits_minus in Iterators.product(iteration_list...)
