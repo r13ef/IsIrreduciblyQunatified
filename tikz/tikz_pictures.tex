@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows}
+\begin{document}
+\begin{tikzpicture}
+\coordinate (x0) at (0.0, 2.0) node at (x0) [below left] {$0$};
+\coordinate (x1) at (-0.5, 2.5) node at (x1) [below left] {$1$};
+\coordinate (x2) at (-1.0, 3.0) node at (x2) [below left] {$2$};
+\coordinate (x3) at (-1.5, 3.5) node at (x3) [below left] {$3$};
+\coordinate (x4) at (-2.0, 4.0) node at (x4) [below left] {$4$};
+\coordinate (y0) at (0.0, 2.0) node at (y0) [below right] {$0$};
+\coordinate (y1) at (0.5, 2.5) node at (y1) [below right] {$1$};
+\coordinate (y2) at (1.0, 3.0) node at (y2) [below right] {$2$};
+\coordinate (y3) at (1.5, 3.5) node at (y3) [below right] {$3$};
+\coordinate (y4) at (2.0, 4.0) node at (y4) [below right] {$4$};
+\coordinate (c) at (0,1) node at (c) {$\xi_1+\xi_2,\xi_3+\xi_4,$};
+\fill[gray] (0.0, 2.0) circle (2pt);
+\fill[gray] (0.5, 2.5) circle (2pt);
+\fill[gray] (1.0, 3.0) circle (2pt);
+\fill[gray] (1.5, 3.5) circle (2pt);
+\fill[gray] (2.0, 4.0) circle (2pt);
+\fill[gray] (-0.5, 2.5) circle (2pt);
+\fill[gray] (0.0, 3.0) circle (2pt);
+\fill[gray] (0.5, 3.5) circle (2pt);
+\fill[gray] (1.0, 4.0) circle (2pt);
+\fill[gray] (1.5, 4.5) circle (2pt);
+\fill[gray] (-1.0, 3.0) circle (2pt);
+\fill[gray] (-0.5, 3.5) circle (2pt);
+\fill[gray] (0.0, 4.0) circle (2pt);
+\fill[gray] (0.5, 4.5) circle (2pt);
+\fill[gray] (1.0, 5.0) circle (2pt);
+\fill[gray] (-1.5, 3.5) circle (2pt);
+\fill[gray] (-1.0, 4.0) circle (2pt);
+\fill[gray] (-0.5, 4.5) circle (2pt);
+\fill[gray] (0.0, 5.0) circle (2pt);
+\fill[gray] (0.5, 5.5) circle (2pt);
+\fill[gray] (-2.0, 4.0) circle (2pt);
+\fill[gray] (-1.5, 4.5) circle (2pt);
+\fill[gray] (-1.0, 5.0) circle (2pt);
+\fill[gray] (-0.5, 5.5) circle (2pt);
+\fill[gray] (0.0, 6.0) circle (2pt);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (0.0,2.0) to [bend right = 12] (0.0,2.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (0.0,2.0) to [bend left = 12] (0.0,2.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (0.0,2.0) to [bend right = 0] (0.5,3.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (0.0,2.0) to [bend left = 0] (-0.5,3.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (0.5,3.5) to [bend right = 12] (0.5,5.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-0.5,3.5) to [bend left = 12] (-0.5,5.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (0.5,2.5) to [bend right = 12] (0.5,2.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-0.5,2.5) to [bend left = 12] (-0.5,2.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (0.5,2.5) to [bend right = 12] (0.5,4.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-0.5,2.5) to [bend left = 12] (-0.5,4.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (1.0,3.0) to [bend right = 12] (1.0,3.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-1.0,3.0) to [bend left = 12] (-1.0,3.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (1.0,3.0) to [bend right = 0] (1.5,4.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-1.0,3.0) to [bend left = 0] (-1.5,4.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (1.5,3.5) to [bend right = 12] (1.5,3.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-1.5,3.5) to [bend left = 12] (-1.5,3.5);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (1.5,3.5) to [bend right = 0] (0.0,3.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-1.5,3.5) to [bend left = 0] (0.0,3.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (2.0,4.0) to [bend right = 12] (2.0,4.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-2.0,4.0) to [bend left = 12] (-2.0,4.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (2.0,4.0) to [bend right = 12] (0.0,4.0);
+\draw[<->][line width=1][{Latex[width = 2mm]}-{Latex[width = 2mm]}] (-2.0,4.0) to [bend left = 12] (0.0,4.0);
+\end{tikzpicture}
+
+\end{document}
