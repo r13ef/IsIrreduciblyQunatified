@@ -1,1 +1,1 @@
-# Is your interaction is irreducibly quantified?
+# Is your interaction irreducibly quantified?
