@@ -2,13 +2,19 @@
 
 julia_version = "1.10.4"
 manifest_format = "2.0"
-project_hash = "393507a2b48f1a9fba29185f33bba11fbf98a028"
+project_hash = "90a538779e729db417f109ff1962008044b141b6"
 
 [[deps.ASL_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "6252039f98492252f9e47c312c8ffda0e3b9e78d"
 uuid = "ae81ac8f-d209-56e5-92de-9978fef736f9"
 version = "0.1.3+0"
+
+[[deps.AbstractAlgebra]]
+deps = ["InteractiveUtils", "LinearAlgebra", "MacroTools", "Preferences", "Random", "RandomExtensions", "SparseArrays", "Test"]
+git-tree-sha1 = "82d5966bba732eaf9972d9b2e3e725de7288c9d7"
+uuid = "c3fe647b-3220-5bb0-a1ea-a7954cac585d"
+version = "0.42.0"
 
 [[deps.ArgTools]]
 uuid = "0dad84c5-d112-42e6-8d28-ef12dabb789f"
@@ -137,6 +143,12 @@ deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
 
+[[deps.FLINT_jll]]
+deps = ["Artifacts", "GMP_jll", "JLLWrappers", "Libdl", "MPFR_jll", "OpenBLAS32_jll"]
+git-tree-sha1 = "4bde447e7bc6de73de36870fc942df02f4dd44b5"
+uuid = "e134572f-a0d5-539d-bddf-3cad8db41a82"
+version = "300.100.300+0"
+
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
@@ -151,6 +163,11 @@ version = "0.10.36"
 
     [deps.ForwardDiff.weakdeps]
     StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+
+[[deps.GMP_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "781609d7-10c4-51f6-84f2-b8444358ff6d"
+version = "6.2.1+6"
 
 [[deps.HiGHS]]
 deps = ["HiGHS_jll", "MathOptInterface", "PrecompileTools", "SparseArrays"]
@@ -253,6 +270,11 @@ git-tree-sha1 = "1fd0a97409e418b78c53fac671cf4622efdf0f21"
 uuid = "d00139f3-1899-568f-a2f0-47f597d42d70"
 version = "5.1.2+0"
 
+[[deps.MPFR_jll]]
+deps = ["Artifacts", "GMP_jll", "Libdl"]
+uuid = "3a97d323-0669-5f0c-9066-3539efd106a3"
+version = "4.2.0+1"
+
 [[deps.MUMPS_seq_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "METIS_jll", "libblastrampoline_jll"]
 git-tree-sha1 = "85047ac569761e3387717480a38a61d2a67df45c"
@@ -298,6 +320,12 @@ deps = ["OpenLibm_jll"]
 git-tree-sha1 = "0877504529a3e5c3343c6f8b4c0381e57e4387e4"
 uuid = "77ba4419-2d1f-58cd-9bb1-8ffee604a2e3"
 version = "1.0.2"
+
+[[deps.Nemo]]
+deps = ["AbstractAlgebra", "FLINT_jll", "Libdl", "LinearAlgebra", "Pkg", "Random", "RandomExtensions", "SHA"]
+git-tree-sha1 = "df48747041f75651a434a42f1ee1b8bc61f9301a"
+uuid = "2edaba10-b0f1-5616-af89-8c11ac63239a"
+version = "0.46.0"
 
 [[deps.NetworkOptions]]
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
@@ -380,6 +408,12 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 [[deps.Random]]
 deps = ["SHA"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[[deps.RandomExtensions]]
+deps = ["Random", "SparseArrays"]
+git-tree-sha1 = "b8a399e95663485820000f26b6a43c794e166a49"
+uuid = "fb686558-2515-59ef-acaa-46db3789a887"
+version = "0.4.4"
 
 [[deps.SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
