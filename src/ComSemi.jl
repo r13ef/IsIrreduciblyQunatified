@@ -14,10 +14,13 @@ module ComSemi
         thue::Vector{Matrix{Int64}}
         ag::Matrix{Int64}
     end
-
+    # Construct new interaction from the data of edges
     function new(n::Int64, edges::Vector{Vector{Vector{Int64}}})::CSemi 
 
         len = length(edges)
+
+        # We first construct the semi Thue system associated to our interaction.
+        # We rewrite the i-th vector of origin to the i-th vector of target.
 
         pre_origin::Vector{Vector{Int64}} = []
         pre_target::Vector{Vector{Int64}} = []
@@ -40,33 +43,45 @@ module ComSemi
             
         end
 
+        # Transpose matrices
         origin::Matrix{Int64} = reduce(hcat,pre_origin)
         target::Matrix{Int64} = reduce(hcat,pre_target)
         
+        # In fact, this is a semi-Thue system (not a Thue system).
         thue = [origin,target]
         thue = completion(thue)
+
+        # Construct ag.
         ag = construct_ag(thue)
+
         csemi = CSemi(n,thue,ag)
         return csemi
 
     end
 
+    # Reduction a word by our (semi) Thue system. 
     function reduce_word(word::Vector{Int64}, thue::Vector{Matrix{Int64}})::Vector{Int64}
         origin = thue[1]
         target = thue[2]
 
         (a,b)= size(origin)
+
+        # We will continue rewriting until no further rewrites can be made.
+        # This is the flag to confirm that the word was rewritten in the previous step.
         flag = true;
 
         while flag
             flag = false
             for i in 1:b 
                 for j in 1:a 
+                    # Can we rewrite the word by this rewriting rule?
                     if word[j] < origin[j, i] 
+                        # If no, we use the next rewriting rule.
                         @goto NextColum
                     end
                 end
                 word += target[:,i] - origin[:,i]
+                # Yes, we rewrite our word!!
                 flag = true
                 break;
                 @label NextColum
@@ -77,6 +92,8 @@ module ComSemi
 
     end
 
+    # Reduction our (semi) Thue system.
+    # To prove that this algorithm halt, please see ..
     function reduce_system(thue::Vector{Matrix{Int64}})::Vector{Matrix{Int64}}
         
         origin = thue[1]
@@ -87,31 +104,43 @@ module ComSemi
 
         used::Set{Vector{Vector{Int64}}} = Set()
 
+        # We will continue reducing until no further reduces can be made.
+        # This is the flag to confirm that our Thue system is reduced in the previous step.
         flag = true
 
         while flag 
 
-            sort!(hp, rev=true)
             flag = false
+
+            # Sort our Thue system. 
+            sort!(hp, rev=true)
             
             while length(hp) > 1
 
+                # (*) Get a rewriting rule.
                 word = popfirst!(hp)
                 word_from = word[1]
                 word_to = word[2]
+
                 len = length(hp)
 
+                # This is the Thue system obtained 
+                # by removing the rule we selected (*) from our Thue system. 
                 temp_origin = reduce(hcat,[vcat(hp[i][1]) for i in 1:len])
                 temp_target = reduce(hcat,[vcat(hp[i][2]) for i in 1:len])
                 temp_thue = [temp_origin,temp_target]
 
+                # Reduce the rewriting rule. 
                 new_word_from = reduce_word(word_from,temp_thue)
                 new_word_to = reduce_word(word_to,temp_thue)
 
                 if word_from == new_word_from && word_to == new_word_to
+                    # If it was not reduced, we add the rule to the "reduced Thue system". 
                     push!(used, word)
                     continue
                 elseif new_word_from != new_word_to
+                    # If it was reduced, we add the new reduced rule to our Thue system 
+                    # and go back to the starting point again!!
                     new_replace = [new_word_from, new_word_to]
                     sort!(new_replace,rev=true)
                     push!(used,new_replace)
@@ -135,6 +164,8 @@ module ComSemi
 
     end
 
+    # Get the critical pair.
+    # One can find Definition of critical pairs in ...
     function critical_pair(a::Vector{Vector{Int64}}, b::Vector{Vector{Int64}})::Vector{Vector{Int64}}
         len = length(a[1])
         x = [min(a[1][i],b[1][i]) for i in 1:len]
@@ -145,6 +176,7 @@ module ComSemi
         return [y,z]
     end
 
+    # Add a new rewriting to our Thue system.
     function add_to_thue(first_word::Vector{Int64},second_word::Vector{Int64},thue::Vector{Matrix{Int64}})::Vector{Matrix{Int64}}
         first_word = reduce(vcat,first_word)
         second_word = reduce(vcat,second_word)
@@ -172,6 +204,8 @@ module ComSemi
 
     end
 
+    # Take Church-Rosser completion.
+    # For detail of the algorithm, please see ..
     function completion(thue::Vector{Matrix{Int64}})::Vector{Matrix{Int64}}
         flag = true
         while flag
@@ -204,6 +238,8 @@ module ComSemi
         return thue
     end
 
+    # Construct AG.
+    # For the definition of AG, please see ...
     function construct_ag(thue::Vector{Matrix{Int64}})::Matrix{Int64}
         origin = thue[1]
         target = thue[2]
@@ -229,6 +265,8 @@ module ComSemi
 
     end
 
+    # This is the main part of our program.
+    # For detail of the algorithm, please see...
     function is_cancellative(self::CSemi)
         origin = self.thue[1]
         (_,length_of_thue::Int64) = size(origin)
@@ -278,6 +316,9 @@ module ComSemi
 
     end
 
+    # Is our semigroup is power cancellative?
+    # We check it by using the theory of invariant factors.
+    # In particular, we compute the Smith normal form.
     function is_power_cancellative(self::CSemi)::Bool 
         kernel = self.thue[1] - self.thue[2]
         A = matrix(ZZ,kernel)

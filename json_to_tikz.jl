@@ -6,7 +6,7 @@ function tikz_picture(n::Int64, num::Int64, edges::Vector{Vector{Vector{Int64}}}
     scale = 0.3
     get_cordinate(x, y) = (-x + y, x + y + maximal_size)
     tikz_cordinate(x,y) = ((-x + y) * scale, (x + y + maximal_size) * scale)
-    tikz_code = "\\hspace*{-1cm}\\begin{minipage}[b]{0.3\\linewidth}\n\\begin{tikzpicture}\n"
+    tikz_code = "\\hspace*{-0.5cm}\\begin{minipage}[b]{0.3\\linewidth}\n\\begin{tikzpicture}\n"
     pairs = Set([i,j] for i = 0:3 for j = i+1:4)
 
     for x in 0:maximal_size
@@ -17,27 +17,6 @@ function tikz_picture(n::Int64, num::Int64, edges::Vector{Vector{Vector{Int64}}}
         (tikz_x, tikz_y) = tikz_cordinate(0,y)
         tikz_code *= "\\coordinate (y$num-$y) at ($tikz_x, $tikz_y) node at (y$num-$y) [below right] {\$$y\$};\n"
     end
-
-    consv_tex = ""
-    for vec in consv 
-        for i in 1:n
-            c = vec[i]
-            if c != 0 
-                if c < 0 && length(consv_tex) > 0 
-                    consv_tex = consv_tex[1:end-1]
-                end
-                if c != 1 && c != -1
-                    consv_tex *= "$c\\xi_$(i-1)+"
-                elseif c == -1
-                    consv_tex *= "-\\xi_$(i-1)+"
-                else
-                    consv_tex *= "\\xi_$(i-1)+"
-                end
-            end
-        end
-        consv_tex = "$(consv_tex[1:end-1]),"
-    end
-    tikz_code *= "\\coordinate (c$num) at (0,$(scale * 2)) node at (c$num) {\$$consv_tex\$};\n"
 
     for x in 0:maximal_size
         for y in 0:maximal_size
@@ -86,7 +65,29 @@ function tikz_picture(n::Int64, num::Int64, edges::Vector{Vector{Vector{Int64}}}
         (origin_x, origin_y) = tikz_cordinate(edge[1], edge[2])
         tikz_code *= "\\draw[arrows = {Stealth[length=1.5mm] - Stealth[length=1.5mm]}] ($origin_x, $origin_y) to [bend right = 12] ($(-origin_x), $origin_y);\n"
     end
-    tikz_code *= "\\end{tikzpicture}\n\\end{minipage}"
+
+    consv_tex = ""
+    for vec in consv 
+        for i in 1:n
+            c = vec[i]
+            if c != 0 
+                if c < 0 && length(consv_tex) > 0 
+                    consv_tex = consv_tex[1:end-1]
+                end
+                if c != 1 && c != -1
+                    consv_tex *= "$c\\xi_$(i-1)+"
+                elseif c == -1
+                    consv_tex *= "-\\xi_$(i-1)+"
+                else
+                    consv_tex *= "\\xi_$(i-1)+"
+                end
+            end
+        end
+        consv_tex = "$(consv_tex[1:end-1]),"
+    end
+    # tikz_code *= "\\coordinate (c$num) at (0,$(scale * 2)) node at (c$num) {\$$consv_tex\$};\n"
+    tikz_code *= "\\end{tikzpicture}\n\\hspace{-0.5cm}\\subcaption{\$$consv_tex\$}\n"
+    tikz_code *= "\\end{minipage}\n"
     return tikz_code;
 end
 
@@ -131,18 +132,16 @@ tex_code = """
 \\usetikzlibrary {bending}
 \\begin{document}
 \\begin{figure}
-\\hspace{-1.5cm} 
 \\begin{tabular}{cccc}
 $my_tikz_code_true
 \\end{tabular}
-\\caption{Irreducibly quantified interactions with \$|S|=5\$.}
+\\caption{Irreducibly quantified interactions for \$S=\\{0,1,2,3,4\\}\$.}
 \\end{figure}
 \\begin{figure}
-\\hspace{0cm} 
 \\begin{tabular}{ccc}
 $my_tikz_code_false
 \\end{tabular}
-\\caption{Exchangeable, separable, but not irreducibly quantified interactions with \$|S|=5\$.}
+\\caption{Exchangeable, separable, but not irreducibly quantified interactions for \$S=\\{0,1,2,3,4\\}\$.}
 \\end{figure}
 \\end{document}
 """
