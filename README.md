@@ -26,9 +26,10 @@ n::Int64 = 5
 edges::Vector{Vector{Vector{Int64}}} = [[[0,0],[1,2],[3,4]],[[0,1],[2,3]],[[0,2],[1,4]],[[0,3],[1,1]],[[0,4],[2,2]]]
 ```
 
-In this program, we always assume that the interaction is exhangeable. 
-Therefore, you don't need to add edges that are symmetric to the others. 
-In this case, that means you don't need to add the vertices [2,1] in the list [[0,0],[1,2],[3,4]].
+In this program, we always assume that the interaction is exchangeable. 
+Therefore, you don't need to add vertices that are symmetric to the others. 
+In our example, that means you don't need to add the vertex [2,1] in the list [[0,0],[1,2],[3,4]]. 
+It will be automatically added.
 
 > [!CAUTION]
 > You need to set the edges, but they must not be empty. If they are empty, it will cause an error in the next step.
