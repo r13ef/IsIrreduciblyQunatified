@@ -93,7 +93,7 @@ module ComSemi
     end
 
     # Reduction our (semi) Thue system.
-    # To prove that this algorithm halt, please see ..
+    # To prove that this algorithm halt, please see [5].
     function reduce_system(thue::Vector{Matrix{Int64}})::Vector{Matrix{Int64}}
         
         origin = thue[1]
@@ -165,7 +165,7 @@ module ComSemi
     end
 
     # Get the critical pair.
-    # One can find Definition of critical pairs in ...
+    # One can find Definition of critical pairs in [5].
     function critical_pair(a::Vector{Vector{Int64}}, b::Vector{Vector{Int64}})::Vector{Vector{Int64}}
         len = length(a[1])
         x = [min(a[1][i],b[1][i]) for i in 1:len]
@@ -205,7 +205,7 @@ module ComSemi
     end
 
     # Take Church-Rosser completion.
-    # For detail of the algorithm, please see ..
+    # For detail of the algorithm, please see [5].
     function completion(thue::Vector{Matrix{Int64}})::Vector{Matrix{Int64}}
         flag = true
         while flag
@@ -239,7 +239,7 @@ module ComSemi
     end
 
     # Construct AG.
-    # For the definition of AG, please see ...
+    # For the definition of AG, please see [4].
     function construct_ag(thue::Vector{Matrix{Int64}})::Matrix{Int64}
         origin = thue[1]
         target = thue[2]
@@ -266,7 +266,7 @@ module ComSemi
     end
 
     # This is the main part of our program.
-    # For detail of the algorithm, please see...
+    # For detail of the algorithm, please see [4].
     function is_cancellative(self::CSemi)
         origin = self.thue[1]
         (_,length_of_thue::Int64) = size(origin)
