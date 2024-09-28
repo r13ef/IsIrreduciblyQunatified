@@ -43,6 +43,9 @@ end
 
 ```
 
+> [!WARNING]
+> Since this computation takes a lot of time, please be careful when using this program.
+
 One can find the list of exhcangeable separable interactions with a state space size of 4 or 5 in /data_sets.
 Moreover, you can find the results of computations in /output.
 
