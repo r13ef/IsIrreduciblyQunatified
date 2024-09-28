@@ -24,13 +24,15 @@ n::Int64 = 5
 # You group together the vertices that exist within the same connected component and describe them in a single vector.
 # This example shows that vertices (0,0), (1,2) and (3,4) are in the same connected components.
 edges::Vector{Vector{Vector{Int64}}} = [[[0,0],[1,2],[3,4]],[[0,1],[2,3]],[[0,2],[1,4]],[[0,3],[1,1]],[[0,4],[2,2]]]
-
-# You don't need to add edges that are symmetric to the others. 
-# In this case, that means you don't need to add the vertices (2,1) in the list.
 ```
+
+In this program, we always assume that the interaction is exhangeable. 
+Therefore, you don't need to add edges that are symmetric to the others. 
+In this case, that means you don't need to add the vertices [2,1] in the list [[0,0],[1,2],[3,4]].
 
 > [!CAUTION]
 > You need to set the edges, but they must not be empty. If they are empty, it will cause an error in the next step.
+> We note that if the edges are empty, the interaction is always irreducibly quantified.
 
 After that, you 
 ```
