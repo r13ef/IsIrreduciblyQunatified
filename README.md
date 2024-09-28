@@ -33,7 +33,7 @@ It will be automatically added.
 
 > [!CAUTION]
 > You need to set the edges, but they must not be empty. If they are empty, it will cause an error in the next step.
-> We note that if the edges are empty, the interaction is always irreducibly quantified.
+> We note that if the edges are empty, one can prove that the interaction is irreducibly quantified.
 
 After that, you 
 ```
