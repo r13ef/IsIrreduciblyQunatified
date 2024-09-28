@@ -9,10 +9,14 @@ For the definitions, please see thier papers.
 In their studies, they consider the condition of interactions, which is called *irreducibly quntified*, as the suitable assumption for the hydrodynamic limit.
 
 If you have seen the definition of irreducibly quntifiedness, you might think that confirming this condition requires an infinite number of steps at first glance.
-However,　I prove that this can be determined in a finite number of steps in my paper.
+However,　I prove that this can be determined in a finite number of steps in my paper [^W24].
 
 This program is check wheather your interaction is irreducibly quantified by using my algorithm.
+To understand detail of the algorithm, please also see two papers[^NO] [^BL].
 
 # Reference 
 [^BKS]: [Bannai, Kenichi, Kametani, Yukio and Sasada, Makiko. Topological Structures of Large Scale Interacting Systems via Uniform Functions and Forms. 2024.](https://arxiv.org/abs/2009.04699)
-[^BS]: [Bannai, Kenichi, Sasada, Makiko. Varadhan's Decomposition of Shift-Invariant Closed $L^2$-forms for Large Scale Interacting Systems on the Euclidean Lattice](https://arxiv.org/abs/2111.08934)
+[^BS]: [Bannai, Kenichi, Sasada, Makiko. Varadhan's Decomposition of Shift-Invariant Closed $L^2$-forms for Large Scale Interacting Systems on the Euclidean Lattice. 2024](https://arxiv.org/abs/2111.08934)
+[^W24]: [Wachi, Hidetada. Decision problem on interactions. to be apeared soon]
+[^NO]: [Narendran, Paliath and Ó'Dúnlaing, Colm. Cancellativity in finitely presented semigroups. 1987.](https://www.sciencedirect.com/science/article/pii/S0747717189800288)
+[^BL]: [Ballantyne, A. M. and Lankford, D. S. New decision algorithm for finitely presented commutative semigroups. 1980](https://core.ac.uk/download/pdf/82308735.pdf)
