@@ -338,16 +338,6 @@ function is_power_cancellative(self::CSemi)::Bool
     return true
 end
 
-function is_irreducibly_quantified_with_comments(self::CSemi)::Bool
-    if is_power_cancellative(self) && is_cancellative(self)
-        println("Your interaction is irreducibly quantified!!")
-        return true
-    else
-        println("Unfortunately, your interaction is irreducibly quantified!!")
-        return false
-    end
-end
-
 function is_irreducibly_quantified(self::CSemi)::Bool
     return is_power_cancellative(self) && is_cancellative(self)
 end
