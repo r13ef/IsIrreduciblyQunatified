@@ -35,15 +35,12 @@ It will be automatically added.
 > You need to set the edges, but they must not be empty. If they are empty, it will cause an error in the next step.
 > We note that if the edges are empty, one can prove that the interaction is irreducibly quantified.
 
-After that, you 
+After that, 
 ```
 csemi = ComSemi.new(n,edges)
-if ComSemi.is_irreducibly_quantified(csemi) 
-    println("Your interaction is irreducibly quantified!!")
-else
-    println("Unfortunately, your interaction is not irreducibly quantified.")
-end
 
+# If this interaction is irreducibly quantified, it will return true.
+ComSemi.is_irreducibly_quantified(csemi) 
 ```
 
 > [!WARNING]
