@@ -12,6 +12,7 @@ struct CSemi
     n::Int64
     # the complete semi-thue system of this c.s.
     thue::Vector{Matrix{Int64}}
+    # For the definition of AG, please see [4].
     ag::Matrix{Int64}
 end
 
