@@ -20,7 +20,6 @@ end
 function new(n::Int64, edges::Vector{Vector{Vector{Int64}}})::CSemi
 
     len = length(edges)
-
     # We first construct the semi Thue system associated to our interaction.
     # We rewrite the i-th vector of origin to the i-th vector of target.
 
@@ -46,7 +45,11 @@ function new(n::Int64, edges::Vector{Vector{Vector{Int64}}})::CSemi
 
     end
 
-    println()
+    # If edges are empty, then it return trivial commutative semigroup.
+    if length(pre_origin) == 0
+        return CSemi(n, [], Array{Int}(undef, 0, 0))
+    end
+
     # Transpose matrices
     origin::Matrix{Int64} = reduce(hcat, pre_origin)
     target::Matrix{Int64} = reduce(hcat, pre_target)
@@ -60,7 +63,7 @@ function new(n::Int64, edges::Vector{Vector{Vector{Int64}}})::CSemi
     ag = construct_ag(thue)
 
     csemi = CSemi(n, thue, ag)
-    return csemi
+    csemi
 
 end
 
@@ -93,7 +96,7 @@ function reduce_word(word::Vector{Int64}, thue::Vector{Matrix{Int64}})::Vector{I
         end
     end
 
-    return word
+    word
 
 end
 
@@ -165,7 +168,7 @@ function reduce_system(thue::Vector{Matrix{Int64}})::Vector{Matrix{Int64}}
     len = length(hp)
     reduced_origin = reduce(hcat, [vcat(hp[i][1]) for i in 1:len])
     reduced_target = reduce(hcat, [vcat(hp[i][2]) for i in 1:len])
-    return [reduced_origin, reduced_target]
+    [reduced_origin, reduced_target]
 
 end
 
@@ -178,7 +181,7 @@ function critical_pair(a::Vector{Vector{Int64}}, b::Vector{Vector{Int64}})::Vect
     y = [a[2][i] + b[1][i] - x[i] for i in 1:len]
     z = [b[2][i] + a[1][i] - x[i] for i in 1:len]
 
-    return [y, z]
+    [y, z]
 end
 
 # Add a new rewriting to our Thue system.
@@ -205,7 +208,7 @@ function add_to_thue(first_word::Vector{Int64}, second_word::Vector{Int64}, thue
     sorted_origin = reduce(hcat, [vcat(to_sort[i][1]) for i in 1:len])
     sorted_target = reduce(hcat, [vcat(to_sort[i][2]) for i in 1:len])
 
-    return [sorted_origin, sorted_target]
+    [sorted_origin, sorted_target]
 
 end
 
@@ -240,7 +243,7 @@ function completion(thue::Vector{Matrix{Int64}})::Vector{Matrix{Int64}}
         end
     end
 
-    return thue
+    thue
 end
 
 # Construct AG.
@@ -266,7 +269,7 @@ function construct_ag(thue::Vector{Matrix{Int64}})::Matrix{Int64}
         Ag = hcat(Ag, new_ag)
     end
 
-    return Ag
+    Ag
 
 end
 
@@ -317,7 +320,7 @@ function is_cancellative(self::CSemi)
         end
     end
 
-    return true
+    true
 
 end
 
@@ -335,11 +338,15 @@ function is_power_cancellative(self::CSemi)::Bool
             return false
         end
     end
-    return true
+    true
 end
 
 function is_irreducibly_quantified(self::CSemi)::Bool
-    return is_power_cancellative(self) && is_cancellative(self)
+    if length(self.thue) == 0
+        true
+    else
+        is_power_cancellative(self) && is_cancellative(self)
+    end
 end
 
 export CSemi, new, is_cancellative, is_power_cancellative
