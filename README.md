@@ -1,7 +1,9 @@
 # Is your interaction irreducibly quantified?
 
 # Introduction
-The hydrodynamic limit is a mathematical method that derives macroscopic deterministic partial differential equations as limits from microscopic large-scale interacting systems. Varadahn's decomposition theorem is important in proving the hydrodynamic limit for a non-gradient model. In the studies Bannai-Kametani-Sasada[^BKS] and Bannai-Sasada[^BS], they prove Varadahn's decomposition theorem for a general class of large-scale interacting systems. In their setting, microscopic large-scale interacting systems are constructed by interactions. For the definitions, please see their papers. In their studies, they consider the condition of interactions, which is called irreducibly quantified, as the suitable assumption for the hydrodynamic limit.
+The hydrodynamic limit is a mathematical method that derives macroscopic deterministic partial differential equations as limits from microscopic large-scale interacting systems. Varadahn's decomposition theorem is important in proving the hydrodynamic limit for a non-gradient model. In the studies Bannai-Kametani-Sasada[^BKS] and Bannai-Sasada[^BS], they prove Varadahn's decomposition theorem for a general class of large-scale interacting systems. In their setting, microscopic large-scale interacting systems are constructed by interactions. In their studies, they consider the condition of interactions, which is called irreducibly quantified, as the suitable assumption for the hydrodynamic limit.
+For more details on the definitions of each concept, please refer to the study Bannai-Koriki-Sasada-Wachi-Yamamoto[^BKSWY] that systematically classifies the interactions.
+
 
 If you have seen the definition of irreducibly quantified ness, you might think that confirming this condition requires an infinite number of steps at first glance. However, I prove this can be determined in a finite number of steps in my paper[^W24].
 
@@ -43,6 +45,7 @@ Moreover, you can find the results of computations in /output.
 # Reference 
 [^BKS]: [Bannai, Kenichi, Kametani, Yukio and Sasada, Makiko. Topological Structures of Large Scale Interacting Systems via Uniform Functions and Forms. 2024.](https://arxiv.org/abs/2009.04699)
 [^BS]: [Bannai, Kenichi, Sasada, Makiko. Varadhan's Decomposition of Shift-Invariant Closed $L^2$-forms for Large Scale Interacting Systems on the Euclidean Lattice. 2024](https://arxiv.org/abs/2111.08934)
+[^BKSWY]: [Bannai, Kenichi, Sasada, Makiko, Koriki, Jun, Wachi, Hidetada, and Yamamoto, Shuji, On interaction for large-scale interactiong systems, 2024.](https://arxiv.org/abs/2410.06778)
 [^W24]: [Wachi, Hidetada. Decision problem on interactions. to be apeared soon]
 [^NO]: [Narendran, Paliath and Ó'Dúnlaing, Colm. Cancellativity in finitely presented semigroups. 1987.](https://www.sciencedirect.com/science/article/pii/S0747717189800288)
 [^BL]: [Ballantyne, A. M. and Lankford, D. S. New decision algorithm for finitely presented commutative semigroups. 1980](https://core.ac.uk/download/pdf/82308735.pdf)
