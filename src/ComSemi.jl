@@ -46,7 +46,7 @@ function new(n::Int64, edges::Vector{Vector{Vector{Int64}}})::CSemi
     end
 
     # If edges are empty, then it return trivial commutative semigroup.
-    if length(pre_origin) == 0
+    if isempty(pre_origin)
         return CSemi(n, [], Array{Int}(undef, 0, 0))
     end
 
@@ -342,7 +342,7 @@ function is_power_cancellative(self::CSemi)::Bool
 end
 
 function is_irreducibly_quantified(self::CSemi)::Bool
-    if length(self.thue) == 0
+    if isempty(self.thue)
         true
     else
         is_power_cancellative(self) && is_cancellative(self)
