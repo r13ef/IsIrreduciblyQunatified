@@ -16,7 +16,7 @@ To understand detail of the algorithm, please also see two papers[^NO] [^BL].
 
 # How to use
 
-If you want to check whether your interaction is irreducibly quantified, you need to write down your interaction in the following forms.
+First, you need to write down your interaction in the following format.
 ```
 # size of the state space
 n::Int64 = 5
@@ -31,11 +31,7 @@ Therefore, you don't need to add vertices that are symmetric to the others.
 In our example, that means you don't need to add the vertex [2,1] in the list [[0,0],[1,2],[3,4]]. 
 It will be automatically added.
 
-> [!CAUTION]
-> You need to set the edges, but they must not be empty. If they are empty, it will cause an error in the next step.
-> We note that if the edges are empty, one can prove that the interaction is irreducibly quantified.
-
-After that, 
+If you want to check the interaction is irreducibly quantified, do the following.
 ```
 csemi = ComSemi.new(n,edges)
 
@@ -47,6 +43,7 @@ ComSemi.is_irreducibly_quantified(csemi)
 > Since this computation takes a lot of time, please be careful when using this program.
 
 One can find the list of exhcangeable separable interactions with a state space size of 4 or 5 in /data_sets.
+You can also find these data sets [here](https://www.google.com).
 Moreover, you can find the results of computations in /output.
 
 # Reference 
